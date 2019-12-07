@@ -1,20 +1,49 @@
-import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Context } from '../context/PlaylistContext';
+import { NavigationStackProp } from 'react-navigation-stack';
 
-interface MainScreenProps {}
+interface MainScreenProps {
+  navigation: NavigationStackProp
+}
 
-const MainScreen = (props: MainScreenProps) => {
+
+const MainScreen = ({navigation}: MainScreenProps) => {
+  const { state } = useContext(Context)
   return (
-    <View style={styles.container}>
-      <Text>MainScreen</Text>
-    </View>
+    <View>
+                <FlatList 
+                    data={state.playlists}
+                    keyExtractor= {playlist => `${playlist.id}`}
+                    renderItem={ ({item}) => {
+                        return (
+                          <TouchableOpacity onPress={() => navigation.navigate('')}>
+                            <View style={styles.row}>
+                                <Text style={styles.title}>{ item.name }</Text>
+                            </View>
+                          </TouchableOpacity>
+                        
+                            )
+                    }}
+                />
+            </View>
   );
 };
 
 export default MainScreen;
 
 const styles = StyleSheet.create({
-  container: {}
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderColor: 'gray',
+    paddingHorizontal: 10
+},
+title: {
+    fontSize: 18
+}
 });
 
 
