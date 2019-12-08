@@ -13,7 +13,7 @@ const SongsScreen = (props: SongsScreenProps) => {
     const { state } = useContext(Context)
     const playlist = state.selectedPlaylist
     return (
-        <View style={{backgroundColor: playlist.color}}>
+        <View style={[styles.main, {backgroundColor: playlist.color}]}>
             <FlatList 
                 data={playlist.songs}
                 keyExtractor= {song => `${song.id}`}
@@ -43,11 +43,14 @@ SongsScreen.navigationOptions = ({ navigation }: SongsScreenProps) => {
 export default SongsScreen;
 
 const styles = StyleSheet.create({
+    main: {
+        flex: 1,
+    },
 row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 20,
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: 'gray',
     paddingHorizontal: 10
 },

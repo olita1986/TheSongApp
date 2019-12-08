@@ -85,6 +85,21 @@ const playlists: Playlist[] = [
                 name: "We are the champions"
             }
         ]
+    },
+    {
+        id: 2,
+        name: "Heavy Metal",
+        color: "#6dde8b",
+        songs: [
+            {
+                id: 2,
+                name: "Freak on a leash"
+            },
+            {
+                id: 3,
+                name: "The Day that never comes"
+            }
+        ]
     }
 ] 
 
@@ -96,6 +111,14 @@ const songs = [
     {
         id: 0,
         name: "Redemption Song"
+    },
+    {
+        id: 2,
+        name: "Freak on a leash"
+    },
+    {
+        id: 3,
+        name: "The Day that never comes"
     }
 ]
 

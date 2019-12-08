@@ -25,12 +25,12 @@ const MainScreen = ({navigation}: MainScreenProps) => {
                 return (
                   <TouchableOpacity onPress={() => onPlaylistPressed(item)}>
                     <View style={styles.row}>
+                        <View style={[styles.playlistFlag, {backgroundColor: item.color}]}/>
                         <Text style={styles.title}>{ item.name }</Text>
                         <Text>{item.songs.length}</Text>
                     </View>
                   </TouchableOpacity>
-                
-                    )
+                )
             }}
         />
     </View>
@@ -42,17 +42,22 @@ export default MainScreen;
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 20,
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: 'gray',
-    paddingHorizontal: 10
+    paddingRight: 10,
+    alignItems: 'center'
 },
 title: {
-    fontSize: 18
+    fontSize: 18,
+    flex: 1,
+    paddingLeft: 5
 },
 songCount: {
   fontSize: 18
+},
+playlistFlag: {
+  width: 20,
+  height: 80
 }
 });
 
