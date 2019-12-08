@@ -4,17 +4,14 @@ import { createCtx } from './createDataContext';
 
 export enum ActionTypes {
     ADD_SONG = "ADD_SONG",
-    SET_PLAYLIST = "SET_PLAYLIST"
+    SET_PLAYLIST = "SET_PLAYLIST",
+    REMOVE_SONG = "REMOVE_SONG"
 }
 
-// interface Action {
-//     type: ActionTypes,
-//     payload: Song | Playlist
-// }
-
 type Action =
-  | { type: ActionTypes; payload: Song[] }
-  | { type: ActionTypes; payload: Playlist }
+  | { type: ActionTypes.ADD_SONG; payload: Song }
+  | { type: ActionTypes.SET_PLAYLIST; payload: Playlist }
+  | { type: ActionTypes.REMOVE_SONG; payload: Song }
 
 export interface AppState {
     playlists: Playlist[]
@@ -42,6 +39,25 @@ const playlistReducer = (state: AppState, action: Action): AppState => {
                 }),
                 selectedPlaylist: newSelectedPlaylist
             }
+        case ActionTypes.SET_PLAYLIST:
+            return {
+                ...state,
+                selectedPlaylist: action.payload
+            }
+        case ActionTypes.REMOVE_SONG:
+                const newSongs: Song[] = state.selectedPlaylist.songs.filter(song => song.id !== action.payload.id)
+                const newPlaylist: Playlist = {
+                    ...state.selectedPlaylist,
+                    songs: newSongs
+                } 
+                return {
+                    ...state,
+                    playlists: state.playlists.map( playlist => {
+                            return playlist.id === state.selectedPlaylist.id ?
+                                newPlaylist : playlist
+                    }),
+                    selectedPlaylist: newPlaylist
+                }
         default:
             return state
     }
@@ -51,7 +67,7 @@ const playlists: Playlist[] = [
     {
         id: 0,
         name: "Relaxing",
-        color: "#fff",
+        color: "#9FA8DA",
         songs: [
             {
                 id: 0,
@@ -62,7 +78,7 @@ const playlists: Playlist[] = [
     {
         id: 1,
         name: "Work",
-        color: "#ddnnff",
+        color: "#42f5f5",
         songs: [
             {
                 id: 1,
