@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { Context, ActionTypes } from '../context/PlaylistContext';
 import { NavigationStackProp } from 'react-navigation-stack';
 import { Playlist } from '../models/Playlist';
@@ -17,7 +17,7 @@ const MainScreen = ({navigation}: MainScreenProps) => {
     navigation.navigate('Songs', { playlistName: playlist.name })
   }
   return (
-    <View>
+    <ScrollView>
         <FlatList 
             data={state.playlists}
             keyExtractor= {playlist => `${playlist.id}`}
@@ -33,7 +33,7 @@ const MainScreen = ({navigation}: MainScreenProps) => {
                 )
             }}
         />
-    </View>
+    </ScrollView>
   );
 };
 

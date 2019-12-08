@@ -4,6 +4,7 @@ import { NavigationStackProp } from 'react-navigation-stack';
 import { Context, ActionTypes } from '../context/PlaylistContext';
 import { Feather } from '@expo/vector-icons';
 import { Song } from '../models/Song';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface SongsSelectionScreenProps {
     navigation: NavigationStackProp
@@ -31,7 +32,7 @@ const SongsSelectionScreen = (props: SongsSelectionScreenProps) => {
     }
 
   return (
-    <View>
+    <ScrollView>
         <FlatList 
             extraData={selectedSongIds}
             data={state.songs}
@@ -51,7 +52,7 @@ const SongsSelectionScreen = (props: SongsSelectionScreenProps) => {
                 )
             }}
         />
-    </View>
+    </ScrollView>
   );
 };
 
